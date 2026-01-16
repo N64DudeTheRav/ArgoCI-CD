@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weer-app
+  name: weerservice
 spec:
   replicas: 3 # Draai 3 kopieën voor load-balancing en uptime
   selector:
     matchLabels:
-      app: weer
+      app: weerservice
   template:
     metadata:
       labels:
-        app: weer
+        app: weerservice
     spec:
       containers:
-        - name: weer-app
+        - name: weerservice
           image: n64docker/testmet:latest
           ports:
             - containerPort: 80
