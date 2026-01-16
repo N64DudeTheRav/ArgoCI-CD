@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weerservice-app   # I renamed this to match your folder
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # 1. Fixed the Repo URL to match your screenshot
+    repoURL: https://github.com/TropoMetrics/ArgoCI-CD
+    targetRevision: main
+    # 2. Fixed the Path to match your actual folder
+    path: weerservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
