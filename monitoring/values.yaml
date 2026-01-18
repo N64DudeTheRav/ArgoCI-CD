@@ -51,7 +51,7 @@ kube-prometheus-stack:
       configReloaderResources:
         limits:
           cpu: 200m
-          memory: 50Mi
+          memory: 100Mi
         requests:
           cpu: 50m
           memory: 50Mi
