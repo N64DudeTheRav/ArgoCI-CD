@@ -1,75 +1,62 @@
-# 1. Alertmanager
-alertmanager:
-  enabled: true
-  config:
-    global:
-      resolve_timeout: 5m
-    route:
-      group_by: ['job']
-      group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 12h
-      receiver: 'null'
-      routes:
-        - match:
-            alertname: Watchdog
-          receiver: 'null'
-    receivers:
-      - name: 'null'
+kube-prometheus-stack:
 
-# 2. Grafana
-grafana:
-  enabled: true
-  adminPassword: "prom-operator"
-  service:
-    type: LoadBalancer
-  # Fix "Database Locked" error
-  grafana.ini:
-    database:
-      wal: true
-  # Fix "Permission Denied" error
-  securityContext:
-    runAsNonRoot: false
-    runAsUser: 0
-    fsGroup: 0
+  # 1. Alertmanager
+  alertmanager:
+    enabled: true
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ['job']
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 12h
+        receiver: 'null'
+        routes:
+          - match:
+              alertname: Watchdog
+            receiver: 'null'
+      receivers:
+        - name: 'null'
 
-# 3. Node Expor
-nodeExporter:
-  enabled: false
-  service:
-    hostNetwork: true
-  # FIX: Disable the root filesystem mount to bypass the "slave mount" error
-  hostRootFsMount:
-    enabled: false
-# 4. Prometheus
-prometheus:
-  prometheusSpec:
-    # Fix 1: Permissions
+  # 2. Grafana
+  grafana:
+    enabled: true
+    adminPassword: "prom-operator"
+    service:
+      type: LoadBalancer
+    grafana.ini:
+      database:
+        wal: true
     securityContext:
-      runAsUser: 0
       runAsNonRoot: false
+      runAsUser: 0
       fsGroup: 0
-    
-    # Fix 2: THE RELOADER FIX (Increased to 100Mi to prevent OOMKill)
-    configReloaderResources:
-      limits:
-        cpu: 200m
-        memory: 100Mi
-      requests:
-        cpu: 50m
-        memory: 50Mi
 
-    # Fix 3: Tell Prometheus to read the Alpine Host
-    additionalScrapeConfigs:
-      - job_name: 'alpine-vm-host'
-        static_configs:
-          - targets: ['10.10.90.151:9100']
+  # 3. Node Exporter
+  nodeExporter:
+    enabled: false
 
-    # OPTIONAL: Uncomment the section below if you want your data to survive a restart
-    # storageSpec:
-    #   volumeClaimTemplate:
-    #     spec:
-    #       accessModes: ["ReadWriteOnce"]
-    #       resources:
-    #         requests:
-    #           storage: 10Gi
+  # 4. Prometheus
+  prometheus:
+    prometheusSpec:
+      # Fix 1: Permissions
+      securityContext:
+        runAsUser: 0
+        runAsNonRoot: false
+        fsGroup: 0
+      
+      
+      configReloaderResources:
+        limits:
+          cpu: 200m
+          memory: 100Mi
+        requests:
+          cpu: 50m
+          memory: 50Mi
+
+      
+      additionalScrapeConfigs:
+        - job_name: 'alpine-vm-host'
+          static_configs:
+            - targets: ['10.10.90.151:9100']
