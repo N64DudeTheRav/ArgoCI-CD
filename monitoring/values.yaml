@@ -57,9 +57,10 @@ kube-prometheus-stack:
 
       
       additionalScrapeConfigs:
-        - job_name: 'alpine-vm-host'
+        - job_name: 'node-exporter'   # <--- Renamed to match Dashboard defaults
+          scrape_interval: 15s
           static_configs:
             - targets: ['10.10.90.151:9100']
               labels:
-                nodename: 'k3s-control'  # <--- Forces the dashboard to link them
-                instance: 'k3s-control'  # <--- Optional: Makes the name prettier
+                nodename: 'k3s-control'  # <--- Crucial for the Dashboard to link data
+                instance: 'k3s-control'  # <--- Makes graphs show the Name instead of IP
