@@ -1,5 +1,5 @@
 kube-prometheus-stack:
-  # 1. Alertmanager (Standard)
+  # 1. Alertmanager
   alertmanager:
     enabled: true
     config:
@@ -24,26 +24,32 @@ kube-prometheus-stack:
     adminPassword: "prom-operator"
     service:
       type: LoadBalancer
+    # Fix "Database Locked" error
+    grafana.ini:
+      database:
+        wal: true
+    # Fix "Permission Denied" error
     securityContext:
       runAsNonRoot: false
       runAsUser: 0
       fsGroup: 0
-    grafana.ini:
-      database:
-        wal: true
 
   # 3. Node Exporter
   nodeExporter:
-    enabled: true
-    hostRootfs: false
-    service:
-      port: 9100
-      targetPort: 9100
+    enabled: false
 
-  # 4. PROMETHEUS
+  # 4. Prometheus
   prometheus:
     prometheusSpec:
+      # Fix "Init:0/1" Loop (Permission Fix)
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
         fsGroup: 0
+
+      # Tell Prometheus to read the Alpine Host!
+      additionalScrapeConfigs:
+        - job_name: 'alpine-vm-host'
+          static_configs:
+            # "172.17.0.1" is usually the Docker/K3s bridge IP to the host.
+            - targets: ['172.17.0.1:9100']
