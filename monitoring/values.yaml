@@ -39,7 +39,7 @@ kube-prometheus-stack:
     enabled: false
 
   # 4. Prometheus
- prometheus:
+  prometheus:
     prometheusSpec:
       # Fix 1: Permissions (Keep this)
       securityContext:
@@ -56,9 +56,8 @@ kube-prometheus-stack:
           cpu: 50m
           memory: 50Mi
 
-      # Tell Prometheus to read the Alpine Host!
+      # Fix 3: Tell Prometheus to read the Alpine Host!
       additionalScrapeConfigs:
         - job_name: 'alpine-vm-host'
           static_configs:
-            # "172.17.0.1" is usually the Docker/K3s bridge IP to the host.
             - targets: ['10.10.90.151:9100']
