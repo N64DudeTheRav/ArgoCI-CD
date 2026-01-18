@@ -1,5 +1,5 @@
 kube-prometheus-stack:
-  # --- ALERTMANAGER CONFIG ---
+  # 1. Alertmanager
   alertmanager:
     enabled: true
     config:
@@ -18,17 +18,18 @@ kube-prometheus-stack:
       receivers:
         - name: 'null'
 
-  # --- GRAFANA CONFIG ---
+  # 2. Grafana
   grafana:
     enabled: true
     adminPassword: "prom-operator"
     service:
       type: LoadBalancer
-      
- nodeExporter:
+
+  # 3. Node Exporter 
+  nodeExporter:
     enabled: true
-    hostRootFsMount:             
-      enabled: false             
+    hostRootFsMount:
+      enabled: false
     service:
       port: 9100
       targetPort: 9100
