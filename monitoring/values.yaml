@@ -33,10 +33,14 @@ grafana:
     runAsUser: 0
     fsGroup: 0
 
-# 3. Node Exporter
+# 3. Node Expor
 nodeExporter:
-  enabled: false
-
+  enabled: true
+  service:
+    hostNetwork: true
+  # FIX: Disable the root filesystem mount to bypass the "slave mount" error
+  hostRootFsMount:
+    enabled: false
 # 4. Prometheus
 prometheus:
   prometheusSpec:
