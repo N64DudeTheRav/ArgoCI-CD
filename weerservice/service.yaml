@@ -4,6 +4,7 @@ metadata:
   name: weerservice
   annotations:
     metallb.io/address-pool: ip-pool
+    metallb.universe.tf/loadBalancerIPs: 10.10.90.33
 spec:
   selector:
     app: weerservice
