@@ -25,11 +25,10 @@ kube-prometheus-stack:
     service:
       type: LoadBalancer
 
-  # 3. Node Exporter 
+  # 3. Node Exporter
   nodeExporter:
     enabled: true
-    hostRootFsMount:
-      enabled: false
+    hostRootfs: false
     service:
       port: 9100
       targetPort: 9100
