@@ -52,4 +52,4 @@ kube-prometheus-stack:
         - job_name: 'alpine-vm-host'
           static_configs:
             # "172.17.0.1" is usually the Docker/K3s bridge IP to the host.
-            - targets: ['172.17.0.1:9100']
+            - targets: ['10.10.90.151']
