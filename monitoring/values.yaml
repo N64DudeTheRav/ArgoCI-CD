@@ -25,5 +25,5 @@ kube-prometheus-stack:
     service:
       type: LoadBalancer
       
-  prometheus-node-exporter:
+  nodeExporter:
     hostRootfs: false
