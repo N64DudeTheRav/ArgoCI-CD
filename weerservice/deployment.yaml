@@ -3,7 +3,32 @@ kind: Deployment
 metadata:
   name: weerservice
 spec:
-  replicas: 6
+  replicas: 2
+  selector:
+    matchLabels:
+      app: weerservice
+  template:
+    metadata:
+      labels:
+        app: weerservice
+    spec:
+      containers:
+        - name: weerservice
+          image: n64docker/testmet:latest
+          ports:
+            - containerPort: 80
+          # Belangrijk voor uptime:
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weerservice-backup
+spec:
+  replicas: 2
   selector:
     matchLabels:
       app: weerservice
