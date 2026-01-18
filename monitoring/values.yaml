@@ -50,17 +50,20 @@ kube-prometheus-stack:
       configReloaderResources:
         limits:
           cpu: 200m
-          memory: 100Mi
+          memory: 50Mi
         requests:
           cpu: 50m
           memory: 50Mi
 
       
       additionalScrapeConfigs:
-        - job_name: 'node-exporter'   # <--- Renamed to match Dashboard defaults
+        - job_name: 'node-exporter'   '
           scrape_interval: 15s
           static_configs:
             - targets: ['10.10.90.151:9100']
               labels:
-                nodename: 'k3s-control'  # <--- Crucial for the Dashboard to link data
-                instance: 'k3s-control'  # <--- Makes graphs show the Name instead of IP
+                nodename: 'k3s-control'  
+                instance: 'k3s-control' 
+              labels:
+                nodename: 'k3s-control' 
+                instance: 'k3s-control' 
