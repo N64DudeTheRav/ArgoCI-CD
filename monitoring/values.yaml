@@ -39,13 +39,22 @@ kube-prometheus-stack:
     enabled: false
 
   # 4. Prometheus
-  prometheus:
+ prometheus:
     prometheusSpec:
-      # Fix "Init:0/1" Loop (Permission Fix)
+      # Fix 1: Permissions (Keep this)
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
         fsGroup: 0
+      
+      # Fix 2: THE NEW FIX (Increase CPU for the reloader) 🚀
+      configReloaderResources:
+        limits:
+          cpu: 200m
+          memory: 50Mi
+        requests:
+          cpu: 50m
+          memory: 50Mi
 
       # Tell Prometheus to read the Alpine Host!
       additionalScrapeConfigs:
