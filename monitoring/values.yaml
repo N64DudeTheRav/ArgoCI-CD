@@ -60,3 +60,6 @@ kube-prometheus-stack:
         - job_name: 'alpine-vm-host'
           static_configs:
             - targets: ['10.10.90.151:9100']
+              labels:
+                nodename: 'k3s-control'  # <--- Forces the dashboard to link them
+                instance: 'k3s-control'  # <--- Optional: Makes the name prettier
