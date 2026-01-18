@@ -1,4 +1,5 @@
 kube-prometheus-stack:
+  # --- ALERTMANAGER CONFIG ---
   alertmanager:
     enabled: true
     config:
@@ -16,7 +17,6 @@ kube-prometheus-stack:
             receiver: 'null'
       receivers:
         - name: 'null'
-      # We will add email/slack settings here later!
 
   # --- GRAFANA CONFIG ---
   grafana:
@@ -24,3 +24,6 @@ kube-prometheus-stack:
     adminPassword: "prom-operator"
     service:
       type: LoadBalancer
+      
+  prometheus-node-exporter:
+    hostRootfs: false
