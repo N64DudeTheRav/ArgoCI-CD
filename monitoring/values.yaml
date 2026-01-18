@@ -35,7 +35,7 @@ grafana:
 
 # 3. Node Expor
 nodeExporter:
-  enabled: true
+  enabled: false
   service:
     hostNetwork: true
   # FIX: Disable the root filesystem mount to bypass the "slave mount" error
