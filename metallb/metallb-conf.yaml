@@ -1,3 +1,14 @@
+# 1. Ensure the namespace exists with the correct security labels
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+  labels:
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: privileged
+---
+# 2. Define the IP Pool
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -5,8 +16,9 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 10.10.90.30-10.10.90.140 
+    - 10.10.90.30-10.10.90.140
 ---
+# 3. Define the Advertisement (removed interface lock for better compatibility)
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
@@ -14,6 +26,4 @@ metadata:
   namespace: metallb-system
 spec:
   ipAddressPools:
-  - ip-pool
-  interfaces:
-  - eth0  
+    - ip-pool
