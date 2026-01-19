@@ -77,7 +77,7 @@ kube-prometheus-stack:
 
   # 3. Node Exporter
   nodeExporter:
-    enabled: false
+    enabled: true
 
   # 4. Prometheus
   prometheus:
