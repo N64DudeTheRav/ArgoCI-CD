@@ -24,6 +24,8 @@ kube-prometheus-stack:
     adminPassword: "prom-operator"
     service:
       type: LoadBalancer
+      loadBalancerIP: 10.10.90.50
+      annotations: {}
     grafana.ini:
       database:
         wal: true
