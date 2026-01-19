@@ -24,11 +24,11 @@ kube-prometheus-stack:
     adminPassword: "prom-operator"
     service:
       type: LoadBalancer
-    # Fix "Database Locked" error
+      loadBalancerIP: 10.10.90.50
+      annotations: {}
     grafana.ini:
       database:
         wal: true
-    # Fix "Permission Denied" error
     securityContext:
       runAsNonRoot: false
       runAsUser: 0
@@ -41,21 +41,27 @@ kube-prometheus-stack:
   # 4. Prometheus
   prometheus:
     prometheusSpec:
+      # Fix 1: Permissions
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
         fsGroup: 0
-
+      
+      # Fix 2: CPU for the reloader
       configReloaderResources:
         limits:
           cpu: 200m
-          memory: 50Mi
+          memory: 100Mi
         requests:
           cpu: 50m
           memory: 50Mi
 
-      # Tell Prometheus to read the Alpine Host!
+      # Fix 3: Dashboard Compatibility
       additionalScrapeConfigs:
-        - job_name: 'alpine-vm-host'
+        - job_name: 'node-exporter'
+          scrape_interval: 15s
           static_configs:
-            - targets: ['172.17.0.1:9100']
+            - targets: ['10.10.90.151:9100']
+              labels:
+                nodename: 'k3s-control'
+                instance: 'k3s-control'
