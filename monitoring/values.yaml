@@ -34,61 +34,18 @@ kube-prometheus-stack:
       runAsUser: 0
       fsGroup: 0
 
-  # 3. Node Exporter
   nodeExporter:
     enabled: false
 
   # 4. Prometheus
-  kube-prometheus-stack:
-  # 1. Alertmanager
-  alertmanager:
-    enabled: true
-    config:
-      global:
-        resolve_timeout: 5m
-      route:
-        group_by: ['job']
-        group_wait: 30s
-        group_interval: 5m
-        repeat_interval: 12h
-        receiver: 'null'
-        routes:
-          - match:
-              alertname: Watchdog
-            receiver: 'null'
-      receivers:
-        - name: 'null'
-
-  # 2. Grafana
-  grafana:
-    enabled: true
-    adminPassword: "prom-operator"
-    service:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.90.50
-      annotations: {}
-    grafana.ini:
-      database:
-        wal: true
-    securityContext:
-      runAsNonRoot: false
-      runAsUser: 0
-      fsGroup: 0
-
-  # 3. Node Exporter
-  nodeExporter:
-    enabled: true
-
-  # 4. Prometheus
   prometheus:
     prometheusSpec:
-      # Fix 1: Permissions
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
         fsGroup: 0
       
-      # Fix 2: CPU for the reloader
+      
       configReloaderResources:
         limits:
           cpu: 200m
@@ -96,13 +53,12 @@ kube-prometheus-stack:
         requests:
           cpu: 50m
           memory: 50Mi
-
-      # Fix 3: Dashboard Compatibility
+          
       additionalScrapeConfigs:
-        - job_name: 'node-exporter'
+        - job_name: 'alpine-host'
           scrape_interval: 15s
           static_configs:
-            - targets: ['10.10.90.151:9100']
+            - targets: ['10.10.90.151:9100']   
               labels:
                 nodename: 'k3s-control'
                 instance: 'k3s-control'
