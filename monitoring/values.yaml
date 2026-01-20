@@ -18,7 +18,7 @@ kube-prometheus-stack:
       receivers:
         - name: 'null'
 
-  # 2. Grafana
+  # 2. Grafana 
   grafana:
     enabled: true
     adminPassword: "prom-operator"
@@ -36,15 +36,14 @@ kube-prometheus-stack:
 
   nodeExporter:
     enabled: false
-
-  # 4. Prometheus
+    
   prometheus:
+    enabled: false   
     prometheusSpec:
       securityContext:
         runAsUser: 0
         runAsNonRoot: false
         fsGroup: 0
-      
       
       configReloaderResources:
         limits:
@@ -58,7 +57,7 @@ kube-prometheus-stack:
         - job_name: 'alpine-host'
           scrape_interval: 15s
           static_configs:
-            - targets: ['10.10.90.151:9100']   
+            - targets: ['10.10.90.151:9100']
               labels:
                 nodename: 'k3s-control'
                 instance: 'k3s-control'
