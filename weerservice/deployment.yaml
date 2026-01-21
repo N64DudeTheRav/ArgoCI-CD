@@ -15,7 +15,7 @@ spec:
       containers:
         - name: weerservice
           # Updated image below
-          image: n64docker/look-at-this-weather
+          image: n64docker/look-at-this-weather:api-cached-server
           ports:
             - containerPort: 80
          
