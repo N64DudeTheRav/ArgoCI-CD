@@ -14,10 +14,11 @@ spec:
     spec:
       containers:
         - name: weerservice
-          image: n64docker/testmet:latest
+          # Updated image below
+          image: ghcr.io/tropometrics/look-at-this-weather:api-cached-server-4763d00
           ports:
             - containerPort: 80
-          # Belangrijk voor uptime:
+         
           readinessProbe:
             httpGet:
               path: /
@@ -39,10 +40,11 @@ spec:
     spec:
       containers:
         - name: weerservice
-          image: n64docker/testmet:latest
+         
+          image: ghcr.io/tropometrics/look-at-this-weather:api-cached-server-4763d00
           ports:
             - containerPort: 80
-          # Belangrijk voor uptime:
+        
           readinessProbe:
             httpGet:
               path: /
