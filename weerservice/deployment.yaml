@@ -41,7 +41,7 @@ spec:
       containers:
         - name: weerservice
          
-          image: ghcr.io/tropometrics/look-at-this-weather:api-cached-server-4763d00
+          image: n64docker/look-at-this-weather:api-cached-server
           ports:
             - containerPort: 80
         
