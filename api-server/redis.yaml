@@ -13,16 +13,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: openmeteo-redis
+  name: redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: openmeteo-redis
+      app: redis
   template:
     metadata:
       labels:
-        app: openmeteo-redis
+        app: redis
     spec:
       containers:
         - name: redis
@@ -52,7 +52,7 @@ metadata:
   name: redis
 spec:
   selector:
-    app: openmeteo-redis
+    app: redis
   ports:
     - port: 6379
       targetPort: 6379
