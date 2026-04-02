@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.10.90.51  # <--- YOUR CHOSEN STATIC IP
+  loadBalancerIP: 10.10.90.51
   ports:
   - name: http
     port: 80

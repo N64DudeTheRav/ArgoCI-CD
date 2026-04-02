@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: weerservice   # I renamed this to match your folder
+  name: weerservice
   namespace: argocd
 spec:
   project: default
