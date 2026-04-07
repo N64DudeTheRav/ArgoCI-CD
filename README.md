@@ -1,4 +1,4 @@
-# 🚀 ArgoCD Kubernetes Infrastructure
+# ArgoCD Kubernetes Infrastructure
 
 A production-ready GitOps infrastructure repository for deploying and managing Kubernetes applications using ArgoCD. This repository contains declarative configurations for automated deployment, monitoring, and load balancing of containerized applications.
 
@@ -7,36 +7,36 @@ A production-ready GitOps infrastructure repository for deploying and managing K
 ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 
-## ✨ Features
+## Features
 
-### 🔄 GitOps with ArgoCD
+### GitOps with ArgoCD
 - **Automated Deployment**: Continuous deployment with ArgoCD's GitOps methodology
 - **Self-Healing Applications**: Automatic synchronization and recovery of application state
 - **Declarative Configuration**: Infrastructure and applications defined as code
 - **Multi-Application Management**: Centralized control of multiple services
 - **Static IP Assignment**: LoadBalancer with fixed IP (10.10.90.51) for ArgoCD server
 
-### 📊 Monitoring Stack
+### Monitoring Stack
 - **Prometheus Integration**: Metrics collection and alerting with kube-prometheus-stack
 - **Grafana Dashboards**: Visual monitoring and analytics interface
 - **Alertmanager**: Intelligent alert routing and notification management
 - **Custom Scrape Configs**: Monitor external hosts (K3s control plane at 10.10.90.151:9100)
 - **LoadBalancer Access**: Grafana accessible via static IP (10.10.90.50)
 
-### ⚖️ Load Balancing & Networking
+### Load Balancing & Networking
 - **MetalLB Integration**: Bare-metal load balancer for on-premises Kubernetes
 - **IP Address Pool**: Dedicated IP range (10.10.90.30-10.10.90.140)
 - **L2 Advertisement**: Layer 2 networking for seamless service exposure
 - **Static IP Assignment**: Predictable service endpoints for external access
 
-### 🌤️ Weather Service Deployment
+### Weather Service Deployment
 - **High Availability**: Dual deployment strategy (primary + backup)
 - **Horizontal Pod Autoscaling**: Auto-scaling from 2 to 10 replicas based on CPU utilization (50% threshold)
 - **Health Checks**: Readiness probes for zero-downtime deployments
 - **Resource Management**: Defined CPU and memory limits for optimal performance
 - **LoadBalancer Service**: External access via static IP (10.10.90.52)
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -49,35 +49,35 @@ A production-ready GitOps infrastructure repository for deploying and managing K
 ### Initial Setup
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone https://github.com/TropoMetrics/ArgoCI-CD.git
    cd ArgoCI-CD
    ```
 
 2. **Create required namespaces**
-   ```bash
+```bash
    kubectl apply -f namespaces/argocd-ns.yaml
    kubectl apply -f namespaces/metallb-ns.yaml
    ```
 
 3. **Install ArgoCD** (if not already installed)
-   ```bash
+```bash
    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
    ```
 
 4. **Apply ArgoCD static LoadBalancer service**
-   ```bash
+```bash
    kubectl apply -f argocd-static
    ```
 
 5. **Install MetalLB** (for bare-metal clusters)
-   ```bash
+```bash
    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
    kubectl apply -f metallb/metallb-conf.yaml
    ```
 
 6. **Get ArgoCD admin password**
-   ```bash
+```bash
    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
    ```
 
@@ -100,7 +100,7 @@ kubectl apply -f monitoring-app.yaml
 
 ArgoCD will automatically sync and deploy the applications from this repository.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Infrastructure & Orchestration
 - **Kubernetes** - Container orchestration platform
@@ -120,7 +120,7 @@ ArgoCD will automatically sync and deploy the applications from this repository.
 - **HorizontalPodAutoscaler** - Automatic pod scaling
 - **Docker** - Container runtime
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ArgoCI-CD/
@@ -141,7 +141,7 @@ ArgoCI-CD/
 └── README.md                 # This file
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### IP Address Allocation
 
@@ -202,7 +202,7 @@ spec:
         averageUtilization: 50  # Scale at 50% CPU
 ```
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 ### Available Metrics
 
@@ -221,7 +221,7 @@ Alerts are configured with the following defaults:
 
 Customize alert routing in `monitoring/values.yaml` under `alertmanager.config`.
 
-## 🔄 GitOps Workflow
+## GitOps Workflow
 
 1. **Make changes** to YAML files in this repository
 2. **Commit and push** to the `main` branch
@@ -243,7 +243,7 @@ argocd app get weerservice
 argocd app get monitoring
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### ArgoCD Not Accessible
 
@@ -300,21 +300,21 @@ kubectl logs <pod-name>
 kubectl get svc weerservice
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Here's how you can help:
 
 1. **Fork the repository**
 2. **Create a feature branch**
-   ```bash
+```bash
    git checkout -b feature/amazing-feature
    ```
 3. **Commit your changes**
-   ```bash
+```bash
    git commit -m 'Add some amazing feature'
    ```
 4. **Push to the branch**
-   ```bash
+```bash
    git push origin feature/amazing-feature
    ```
 5. **Open a Pull Request**
@@ -328,7 +328,7 @@ Contributions are welcome! Here's how you can help:
 - Keep ArgoCD applications in sync
 - Use meaningful commit messages
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/)
@@ -336,12 +336,12 @@ Contributions are welcome! Here's how you can help:
 - [Prometheus Operator](https://prometheus-operator.dev/)
 - [Grafana Documentation](https://grafana.com/docs/)
 
-## 📄 License
+## License
 
 This project is for educational purposes.
 
 ---
 
-**Authors:** Max Blaauw, Arne Jansonius, Kai Diemel & Ole Spiegelenberg  
-**Organization:** HHS (The Hague University of Applied Sciences)  
+**Authors:** Max Blaauw, Arne Jansonius, Kai Diemel & Ole Spiegelenberg
+**Organization:** HHS (The Hague University of Applied Sciences)
 **Domain:** hhs.nl
