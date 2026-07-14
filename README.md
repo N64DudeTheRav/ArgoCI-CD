@@ -1,4 +1,4 @@
-# ArgoCD Kubernetes Infrastructure
+# ArgoCD Kubernetes Infrastructure .
 
 A production-ready GitOps infrastructure repository for deploying and managing Kubernetes applications using ArgoCD. This repository contains declarative configurations for automated deployment, monitoring, and load balancing of containerized applications.
 
