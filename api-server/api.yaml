@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
-          image: ghcr.io/tropometrics/api-server:REPLACE_WITH_NEW_TAG
+          image: ghcr.io/N64DudeTheRav/api-server:api-tropometrics-1  # updated to published tag
           ports:
             - containerPort: 3000
           resources:
