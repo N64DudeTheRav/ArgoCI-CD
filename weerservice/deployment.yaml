@@ -15,6 +15,7 @@ spec:
       containers:
         - name: weerservice
           image: ghcr.io/n64dudetherav/look-at-this-weather:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
@@ -48,6 +49,7 @@ spec:
       containers:
         - name: weerservice
           image: ghcr.io/n64dudetherav/look-at-this-weather:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           
