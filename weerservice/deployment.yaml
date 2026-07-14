@@ -15,7 +15,7 @@ spec:
       containers:
         - name: weerservice
           # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
-          image: ghcr.io/n64dudetherav/look-at-this-weather:REPLACE_WITH_NEW_TAG
+          image: ghcr.io/N64DudeTheRav/look-at-this-weather:api-tropometrics-1
           imagePullPolicy: Always
           env:
             - name: VITE_API_BASE_URL
@@ -53,7 +53,7 @@ spec:
       containers:
         - name: weerservice
           # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
-          image: ghcr.io/n64dudetherav/look-at-this-weather:REPLACE_WITH_NEW_TAG
+          image: ghcr.io/N64DudeTheRav/look-at-this-weather:api-tropometrics-1
           imagePullPolicy: Always
           env:
             - name: VITE_API_BASE_URL
