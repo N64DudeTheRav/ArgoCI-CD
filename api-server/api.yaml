@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/tropometrics/api-server:main
+          # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
+          image: ghcr.io/tropometrics/api-server:REPLACE_WITH_NEW_TAG
           ports:
             - containerPort: 3000
           resources:
@@ -25,6 +26,8 @@ spec:
               cpu: "500m"
               memory: "256Mi"
           env:
+            - name: OPENMETEO_BASE_URL
+              value: "https://api.odspieg.nl"
             - name: REDIS_HOST
               value: redis
             - name: REDIS_PORT

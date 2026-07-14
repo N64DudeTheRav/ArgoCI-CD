@@ -14,8 +14,12 @@ spec:
     spec:
       containers:
         - name: weerservice
-          image: ghcr.io/n64dudetherav/look-at-this-weather:main
+          # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
+          image: ghcr.io/n64dudetherav/look-at-this-weather:REPLACE_WITH_NEW_TAG
           imagePullPolicy: Always
+          env:
+            - name: VITE_API_BASE_URL
+              value: "https://api.odspieg.nl"
           ports:
             - containerPort: 80
           resources:
@@ -48,11 +52,15 @@ spec:
     spec:
       containers:
         - name: weerservice
-          image: ghcr.io/n64dudetherav/look-at-this-weather:main
+          # TODO: replace REPLACE_WITH_NEW_TAG with actual image tag after build/push
+          image: ghcr.io/n64dudetherav/look-at-this-weather:REPLACE_WITH_NEW_TAG
           imagePullPolicy: Always
+          env:
+            - name: VITE_API_BASE_URL
+              value: "https://api.odspieg.nl"
           ports:
             - containerPort: 80
-          
+           
           resources:
             requests:
               cpu: "100m"
