@@ -27,7 +27,7 @@ spec:
               memory: "256Mi"
           env:
             - name: OPENMETEO_BASE_URL
-              value: "https://api.odspieg.nl"
+              value: "https://api-tropometrics.odspieg.nl/"
             - name: REDIS_HOST
               value: redis
             - name: REDIS_PORT
